@@ -3,8 +3,8 @@ name: "My CodeQL config"
 disable-default-queries: true
 
 queries:
-#  - name: Extended Security
-#    uses: security-extended
+  - name: Extended Security
+    uses: security-extended
 #  - name: Security and Quality
 #    uses: security-and-quality
 #  - name: codeql repo
