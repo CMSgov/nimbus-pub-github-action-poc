@@ -12,8 +12,8 @@ public class SQLInjectionSample {
 
     DataSource dataSource;
     private String url = "jdbc:mysql://localhost/test";
-    private String username = "";
-    private String password = "";
+    private String username = "root";
+    private String password = "root123";
 
 
     private Connection getConn() throws SQLException {
