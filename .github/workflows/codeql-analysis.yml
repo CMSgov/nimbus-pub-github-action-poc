@@ -39,7 +39,7 @@ jobs:
 
     # Specify the container in which actions will run
     container:
-      image: codeql-container:f0f91db
+      image: gradle:latest
 
     steps:
     - name: Checkout repository
