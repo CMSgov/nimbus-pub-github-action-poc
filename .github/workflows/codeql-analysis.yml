@@ -86,7 +86,8 @@ jobs:
 
     - run: |
         apt-get update && apt-get install -y jq
-        cat ./scan-results/javascript-builtin.sarif | jq -e '.runs[0].results | select(length > 0)'
+        ls -al ./scan-results
+        cat ./scan-results/java-builtin.sarif | jq -e '.runs[0].results | select(length > 0)'
         if [ "$?" -eq 0 ]
         then
         exit 1
