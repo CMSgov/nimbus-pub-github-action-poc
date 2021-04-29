@@ -88,8 +88,4 @@ jobs:
         apt-get update && apt-get install -y jq
         ls -al ./scan-results
         cat ./scan-results/java-builtin.sarif | jq -e '.runs[0].results | select(length > 0)'
-        if [ "$?" -eq 0 ]
-        then
-        exit 1
-        fi
-
+        if [ "\$?" -eq 0 ]; then exit 1; fi
