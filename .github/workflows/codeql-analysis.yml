@@ -37,6 +37,10 @@ jobs:
         # Learn more:
         # https://docs.github.com/en/free-pro-team@latest/github/finding-security-vulnerabilities-and-errors-in-your-code/configuring-code-scanning#changing-the-languages-that-are-analyzed
 
+    # Specify the container in which actions will run
+    container:
+      image: gradle:latest
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -59,8 +63,8 @@ jobs:
 
     # Autobuild attempts to build any compiled languages  (C/C++, C#, or Java).
     # If this step fails, then you should remove it and run the build manually (see below)
-    - name: Autobuild
-      uses: github/codeql-action/autobuild@v1
+    #- name: Autobuild
+    #  uses: github/codeql-action/autobuild@v1
 
     # ℹ️ Command-line programs to run using the OS shell.
     # 📚 https://git.io/JvXDl
@@ -69,9 +73,23 @@ jobs:
     #    and modify them (or add more) to build your code if your project
     #    uses a compiled language
 
-    #- run: |
+    - run: |
+       chmod +x gradlew
+       ./gradlew build
     #   make bootstrap
     #   make release
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v1
+      with:
+        output: ./scan-results
+
+    - run: |
+        apt-get update && apt-get install -y jq
+        ls -al ./scan-results
+        set +e
+        cat ./scan-results/java-builtin.sarif | jq -e '.runs[0].results | select(length > 0)'
+        if [ "$?" -eq 0 ]
+        then
+        exit 1
+        fi

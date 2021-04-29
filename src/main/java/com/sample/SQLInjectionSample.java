@@ -31,6 +31,7 @@ public class SQLInjectionSample {
                 + "'";
         Connection c = getConn();
         ResultSet rs = c.createStatement().executeQuery(sql);
+        //ResultSet rs = stmt.executeQuery(query);
         while(rs.next()) {
             accountDTOS.add(new AccountDTO());
         }
