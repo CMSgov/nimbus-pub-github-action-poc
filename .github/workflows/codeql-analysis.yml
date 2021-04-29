@@ -39,7 +39,7 @@ jobs:
 
     # Specify the container in which actions will run
     container:
-      image: j3ssie/codeql-docker:latest
+      image: mcr.microsoft.com/cstsectools/codeql-container:latest
       
     steps:
     - name: Checkout repository
